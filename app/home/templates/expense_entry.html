@@ -38,30 +38,30 @@
                             <label class="my-1 me-2" for="project">Project</label>
                             <select class="form-select" id="project" aria-label="Default select example" name="project">
                                 <option selected>Select Project</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                {% for data in projects%}
+                                <option value="{{data[0]}}">{{data[1]}}</option>
+                                {% endfor %}
                             </select>
                               <label class="my-1 me-2" for="cat">Category</label>
                               <select class="form-select" id="cat" aria-label="Default select example" name="cat">
                                   <option selected>Select Category</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  {% for data in categories%}
+                                <option value="{{data[0]}}">{{data[1]}}</option>
+                                {% endfor %}
                               </select>
                               <label class="my-1 me-2" for="subcat">SubCategory</label>
                               <select class="form-select" id="subcat" aria-label="Default select example" name="subcat">
                                   <option selected>Select SubCategory</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  {% for data in sub_cats%}
+                                <option value="{{data[0]}}">{{data[1]}}</option>
+                                {% endfor %}
                               </select>
                               <label class="my-1 me-2" for="module">Module</label>
                               <select class="form-select" id="module" aria-label="Default select example" name="module">
                                   <option selected>Select Module</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  {% for data in modules%}
+                                <option value="{{data[0]}}">{{data[1]}}</option>
+                                {% endfor %}
                               </select>
                           </div>
                         <!-- End of Form -->
@@ -78,9 +78,9 @@
                             <label class="my-1 me-2" for="vendor">VendorName</label>
                             <select class="form-select" id="vendor" aria-label="Default select example">
                                 <option selected>Select Vendor</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                {% for data in vendors%}
+                                <option value="{{data[0]}}">{{data[1]}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <!-- End of Form -->

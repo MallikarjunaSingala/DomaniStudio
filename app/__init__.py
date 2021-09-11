@@ -39,6 +39,10 @@ def create_app(config):
     app.config['WTF_CSRF_SECRET_KEY']="S3cr3t_K#Key"
     app.config['SQLALCHEMY_DATABASE_URI'] = '{}://{}:{}@{}:{}/{}'.format('mysql+pymysql','root','root','localhost','3306','domani')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['DEBUG'] = True
+    app.config['ENV'] = 'development'
+    app.config['DEBUG'] = True
+    app.config['TESTING'] = True
     register_extensions(app)
     register_blueprints(app)
     configure_database(app)

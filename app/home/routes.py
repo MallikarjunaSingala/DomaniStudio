@@ -30,10 +30,48 @@ def index():
 def enterexpense():
     cnxn = mysql.connector.connect(**config)
     db = cnxn.cursor(buffered=True)
-    db.execute('''SELECT * FROM projects''')
+    db.execute('''SELECT id,name FROM projects''')
     projects = db.fetchall()
-    print(projects)
-    return render_template('expense_entry.html', segment='expense',projects=projects)
+    db.execute('''SELECT id,name FROM category''')
+    categories = db.fetchall()
+    db.execute('''SELECT id,name FROM module''')
+    modules = db.fetchall()
+    db.execute('''SELECT id,name FROM sub_category''')
+    sub_cats = db.fetchall()
+    db.execute('''SELECT id,name FROM vendors''')
+    vendors = db.fetchall()
+    return render_template('expense_entry.html', segment='expense',
+            projects=projects,
+            categories=categories,
+            modules=modules,
+            sub_cats=sub_cats,
+            vendors=vendors)
+
+@blueprint.route('/vendors')
+@login_required
+def vendors():
+    cnxn = mysql.connector.connect(**config)
+    db = cnxn.cursor(buffered=True)
+    db.execute('''
+    SELECT
+        COLUMN_NAME
+    FROM
+    INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME="vendors"
+    AND COLUMN_NAME != "logo"''')
+    columns = db.fetchall()
+    return render_template('vendor_details.html', columns=columns)
+    # db.execute('''
+    # SELECT id,
+    # logo,
+    # name,
+    # account_details,
+    # phone_pe_number,
+    # gpay_number,
+    # contact_number,
+    # email_id
+    # from vendors
+    # ''')
 
 @blueprint.route('/<template>')
 @login_required
