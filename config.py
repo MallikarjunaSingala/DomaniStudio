@@ -11,10 +11,17 @@ class Config(object):
     basedir    = os.path.abspath(os.path.dirname(__file__))
 
     # Set up the App SECRET_KEY
-    SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_007')
+    SECRET_KEY = config('SECRET_KEY', default='S3cr3t_K#Key')
+    WTF_CSRF_SECRET_KEY = config('WTF_CSRF_SECRET_KEY', default="S3cr3t_K#Key")
 
-    # This will create a file in <app> FOLDER
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+    SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
+        config( 'DB_ENGINE'   , default='mysql+pymysql'    ),
+        config( 'DB_USERNAME' , default='root'       ),
+        config( 'DB_PASS'     , default='root'          ),
+        config( 'DB_HOST'     , default='localhost'     ),
+        config( 'DB_PORT'     , default=3306            ),
+        config( 'DB_NAME'     , default='domani' )
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):
