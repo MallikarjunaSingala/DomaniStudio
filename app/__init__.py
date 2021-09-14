@@ -41,7 +41,6 @@ def create_app(config):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['DEBUG'] = True
     app.config['ENV'] = 'development'
-    app.config['DEBUG'] = True
     app.config['TESTING'] = True
     register_extensions(app)
     register_blueprints(app)

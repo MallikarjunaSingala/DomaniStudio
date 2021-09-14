@@ -60,18 +60,19 @@ def vendors():
     WHERE TABLE_NAME="vendors"
     AND COLUMN_NAME != "logo"''')
     columns = db.fetchall()
-    return render_template('vendor_details.html', columns=columns)
-    # db.execute('''
-    # SELECT id,
-    # logo,
-    # name,
-    # account_details,
-    # phone_pe_number,
-    # gpay_number,
-    # contact_number,
-    # email_id
-    # from vendors
-    # ''')
+    db.execute('''
+    SELECT id,
+    logo,
+    name,
+    account_details,
+    phone_pe_number,
+    gpay_number,
+    contact_number,
+    email_id
+    from vendors
+    ''')
+    vendors = db.fetchall()
+    return render_template('vendor_details.html', columns=columns,vendors=vendors)
 
 @blueprint.route('/<template>')
 @login_required
