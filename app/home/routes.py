@@ -88,9 +88,47 @@ def add_vendor():
     db = cnxn.cursor(buffered=True)
     if request.method == 'POST':
         name = request.form['name']
+        add = request.form['add']
+        acc = request.form['acc']
+        ppay = request.form['ppay']
+        gpay = request.form['gpay']
+        email = request.form['email']
+        con = request.form['con']
+        remark = request.form['remark']
         db.execute('''
-        INSERT INTO vendors(name) VALUES(%s)
-        ''',[name])
+        INSERT INTO vendors(
+            name,address,Account_details,
+            phone_pe_number,gpay_number,contact_number,
+            email_id,remarks)
+            VALUES(%s,%s,%s,
+            %s,%s,%s,
+            %s,%s)
+        ''',[name,add,acc,ppay,gpay,con,email,remark])
+        cnxn.commit()
+        return redirect(url_for('home_blueprint.vendors'))
+    return  redirect(url_for('home_blueprint.vendors'))
+
+@blueprint.route('/edit_vendor/<id>',methods=['GET', 'POST'])
+@login_required
+def edit_vendor(id):
+    cnxn = mysql.connector.connect(**config)
+    db = cnxn.cursor(buffered=True)
+    if request.method == 'POST':
+        name = request.form['name']
+        add = request.form['add']
+        acc = request.form['acc']
+        ppay = request.form['ppay']
+        gpay = request.form['gpay']
+        email = request.form['email']
+        con = request.form['con']
+        remark = request.form['remark']
+        db.execute('''
+        UPDATE vendors
+        SET name = %s,
+        address=%s,Account_details=%s,
+            phone_pe_number=%s,gpay_number=%s,contact_number=%s,
+            email_id=%s,remarks=%s
+        ''',[name,add,acc,ppay,gpay,con,email,remark])
         cnxn.commit()
         return redirect(url_for('home_blueprint.vendors'))
     return  redirect(url_for('home_blueprint.vendors'))
