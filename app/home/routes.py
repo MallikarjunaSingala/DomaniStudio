@@ -40,6 +40,7 @@ def enterexpense():
     sub_cats = db.fetchall()
     db.execute('''SELECT id,name FROM vendors''')
     vendors = db.fetchall()
+    print(vendors)
     return render_template('expense_entry.html', segment='expense',
             projects=projects,
             categories=categories,
@@ -47,7 +48,7 @@ def enterexpense():
             sub_cats=sub_cats,
             vendors=vendors)
 
-@blueprint.route('/vendors')
+@blueprint.route('/vendors', methods=['GET', 'POST'])
 @login_required
 def vendors():
     cnxn = mysql.connector.connect(**config)
@@ -58,12 +59,18 @@ def vendors():
     FROM
     INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_NAME="vendors"
-    AND COLUMN_NAME != "logo"''')
+    AND COLUMN_NAME NOT IN(
+        "logo",
+        "create_time",
+        "update_time"
+        )
+    ''')
     columns = db.fetchall()
     db.execute('''
-    SELECT id,
-    logo,
+    SELECT
+    id,
     name,
+    address,
     account_details,
     phone_pe_number,
     gpay_number,
@@ -73,6 +80,20 @@ def vendors():
     ''')
     vendors = db.fetchall()
     return render_template('vendor_details.html', columns=columns,vendors=vendors)
+
+@blueprint.route('/add_vendor',methods=['GET', 'POST'])
+@login_required
+def add_vendor():
+    cnxn = mysql.connector.connect(**config)
+    db = cnxn.cursor(buffered=True)
+    if request.method == 'POST':
+        name = request.form['name']
+        db.execute('''
+        INSERT INTO vendors(name) VALUES(%s)
+        ''',[name])
+        cnxn.commit()
+        return redirect(url_for('home_blueprint.vendors'))
+    return  redirect(url_for('home_blueprint.vendors'))
 
 @blueprint.route('/<template>')
 @login_required

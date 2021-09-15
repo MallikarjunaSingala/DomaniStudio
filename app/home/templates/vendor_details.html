@@ -27,7 +27,6 @@
               <table class="table table-centered table-nowrap mb-0 rounded">
                   <thead class="thead-light">
                       <tr>
-                          <th class="border-0 rounded-start">#</th>
                           {% for data in columns %}
                           <th class="border-0">{{data[0]}}</th>
                           {% endfor %}
@@ -38,13 +37,13 @@
                       {% for vendor in vendors %}
                       <tr>
                           <td><a href="#" class="text-primary fw-bold">{{vendor[0]}}</a> </td>
-                          <td class="fw-bold d-flex align-items-center">
-                              <svg class="icon icon-xxs text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path></svg>
-                              {{vendor[1]}}
+                          <td>
+                            {{vendor[1]}}
                           </td>
                           <td>
                             {{vendor[2]}}
                           </td>
+
                           <td>
                             {{vendor[3]}}
                           </td>
@@ -57,6 +56,9 @@
                           <td>
                             {{vendor[6]}}
                           </td>
+                          <td>
+                            {{vendor[7]}}
+                          </td>
                       </tr>
                       {% endfor %}
                       <!-- End of Item -->
@@ -64,6 +66,109 @@
               </table>
           </div>
       </div>
+  </div>
+  <div>
+    <div class="col-lg-4">
+        <!-- Button Modal -->
+        <button type="button" class="btn btn-block btn-gray-800 mb-3" data-bs-toggle="modal" data-bs-target="#modal-form">Add Vendor</button>
+        <!-- Modal Content -->
+        <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="card p-3 p-lg-4">
+                            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h4">Add a Vendor</h1>
+                            </div>
+                            <form action="{{ url_for('home_blueprint.add_vendor') }}"  method="post" class="mt-4">
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="name">Vendor Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="name" name="name" autofocus required>
+                                    </div>  
+                                </div>
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">Address</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="add">
+                                        </div>  
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">Account details</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="acc">
+                                        </div>  
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">Phonepe Number</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="ppay">
+                                        </div>  
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">GPayNumber</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="gpay">
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">Contact</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="con" required>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">Email</label>
+                                        <div class="input-group">
+                                            <input type="email" placeholder="contact@domanistudio.in" class="form-control" id="email" required>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="add">Remarks</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="remark">
+                                        </div>  
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-gray-800">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal Content -->
+    </div>
+    </div>
   </div>
 
 
